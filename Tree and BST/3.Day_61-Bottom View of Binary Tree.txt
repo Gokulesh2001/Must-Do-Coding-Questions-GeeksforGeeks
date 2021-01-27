@@ -1,0 +1,42 @@
+class Tree
+{
+ 
+    // Method that returns the bottom view.
+    public ArrayList <Integer> bottomView(Node root)
+    {
+    // Code here
+    ArrayList<Integer> list = new ArrayList<Integer>();
+    int hd=0;
+    if(root==null){
+        return list;
+    }
+    Map<Integer,Integer> map=new TreeMap<Integer,Integer>();
+    Queue<Node> q=new LinkedList<Node>();
+     root.hd = hd; 
+    q.add(root);
+    while(!q.isEmpty()){
+        Node temp=q.remove();
+         hd=temp.hd;
+        
+        map.put(hd,temp.data);
+        if(temp.left!=null){
+            temp.left.hd=hd-1;
+            q.add(temp.left);
+        }
+         if(temp.right!=null){
+            temp.right.hd=hd+1;
+            q.add(temp.right);
+        }
+    }
+    Set<Entry<Integer,Integer>> set = map.entrySet(); 
+  
+        // Make an iterator 
+        Iterator<Entry<Integer,Integer>> iterator = set.iterator();
+     while (iterator.hasNext()) 
+        { 
+            Map.Entry<Integer,Integer> me = iterator.next(); 
+            list.add(me.getValue()); 
+        } 
+        return list;
+    }
+}

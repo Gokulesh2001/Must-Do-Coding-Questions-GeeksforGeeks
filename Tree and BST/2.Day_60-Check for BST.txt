@@ -1,0 +1,21 @@
+public class Tree
+{
+    // return true if the given tree is a BST, else return false
+    boolean isBST(Node root)
+        {
+            // code here.
+            return validate(root,null,null);
+        }
+        
+        boolean validate(Node root,Integer max,Integer min){
+            if(root==null){
+                return true;
+            }
+            else if(max!=null && root.data>=max || min!=null && root.data<=min ){
+                return false;
+            }
+            else{
+                return validate(root.left,root.data,min) && validate(root.right,max,root.data);
+            }
+        }
+}

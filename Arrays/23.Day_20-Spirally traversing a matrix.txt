@@ -1,0 +1,79 @@
+class Solution{
+    static ArrayList<Integer> spirallyTraverse(int matrix[][], int r, int c)
+    {
+        // code here 
+        int present[][]=new int[r][c];
+        int left=0,right=c-1;
+        int down=r-1;
+        ArrayList<Integer> ans=new ArrayList<Integer>();
+        while(left<r){
+            
+            for(int i=left;i<=right-1;i++){
+                try{
+                if(present[left][i]==0){
+                    ans.add(matrix[left][i]);
+                    present[left][i]=1;
+                }
+                }
+                catch(ArrayIndexOutOfBoundsException exception) {
+    
+}
+                
+            }
+            for(int i=left;i<=down-1;i++){
+                
+               try{
+                if(present[i][right]==0){
+                     
+                    ans.add(matrix[i][right]);
+                   present[i][right]=1;
+                }
+                }
+                catch(ArrayIndexOutOfBoundsException exception) {
+    
+}
+                
+            }
+            for(int i=right;i>=left+1;i--){
+                try {
+                    
+                    
+                    if(present[down][i]==0){
+                    ans.add(matrix[down][i]);
+                    present[down][i]=1;
+                }
+    
+}
+catch(ArrayIndexOutOfBoundsException exception) {
+    
+}
+                
+            }
+            for(int i=down;i>=left+1;i--){
+                try{
+                if(present[i][left]==0){
+                    ans.add(matrix[i][left]);
+                    present[i][left]=1;
+                }
+                }
+                catch(ArrayIndexOutOfBoundsException exception) {
+    
+}
+                
+            }
+            left+=1;
+            right-=1;
+            down-=1;
+            
+            
+            
+        }
+        if(r==c&&r%2!=0){
+            ans.add(matrix[r/2][r/2]);
+        }
+        
+        
+        return ans;
+        
+    }
+}

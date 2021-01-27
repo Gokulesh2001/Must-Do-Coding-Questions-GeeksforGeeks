@@ -1,0 +1,48 @@
+public static ArrayList<Integer> common_element(ArrayList<Integer>v1, ArrayList<Integer>v2)
+{
+    //Your code here
+    //  Collections.sort(v1);
+    //   Collections.sort(v2);
+    ArrayList<Integer> result=new ArrayList<Integer>();
+    Map<Integer, Integer> map1 = new HashMap<>();
+    Map<Integer, Integer> map2 = new HashMap<>();
+    for (int current : v1) { 
+            int count = map1.getOrDefault(current, 0); 
+            map1.put(current, count + 1); 
+            
+        } 
+        
+        for (int current : v2) { 
+            int count = map2.getOrDefault(current, 0); 
+            map2.put(current, count + 1); 
+           
+        } 
+     for (int current : v1) { 
+        //  if(map2.get(current)<=0){
+        //      break;
+        //  }
+        //  if(map1.get(current)==map2.get(current)){
+        //      int count=map1.get(current);
+        //      while(count-->0){
+        //          result.add(current);
+        //          map2.put(current, count);
+        //      }
+        //  }
+        //  if(map1.get(current)!=map2.get(current)){
+        try{
+             int count=Math.min(map1.get(current),map2.get(current));
+             while(count-->0){
+                 result.add(current);
+                 map2.put(current, count);
+             }
+            //  }
+        }  
+        catch(NullPointerException ex){
+         
+     }
+     }
+     
+       
+     Collections.sort(result);
+  return result;      
+}

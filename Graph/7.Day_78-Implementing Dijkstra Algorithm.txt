@@ -1,0 +1,42 @@
+class Solution
+{
+    public int[] dijkstra(int V, ArrayList<ArrayList<ArrayList<Integer>>> adj, int S)
+    {
+        // Write your code here
+        
+         boolean visited[]=new boolean[V];
+         int[] distance=new int[V];
+         for (int i = 1; i <V ; i++) {
+                distance[i] = Integer.MAX_VALUE;
+            }
+            distance[S]=0;
+       PriorityQueue<ArrayList<Integer>> pq=new PriorityQueue<>((a,b)->b.get(1)-a.get(1));
+        ArrayList<Integer> list=new ArrayList<Integer>();
+        list.add(0);
+        list.add(0);
+        pq.add(new ArrayList<Integer>(list));
+        
+        while(!pq.isEmpty()){
+             int temp=pq.remove().get(0);
+             if(visited[temp]){
+                 continue;
+             }
+             visited[temp]=true;
+             List<ArrayList<Integer>> childList=adj.get(temp);
+             for(ArrayList<Integer> child:childList){
+                 int dist=child.get(1);
+                 int childNode=child.get(0);
+                 if(!visited[childNode] && (distance[temp]+dist<distance[childNode])){
+                     distance[childNode]=distance[temp]+dist;
+                     child.set(1,distance[temp]+dist);
+                     pq.add(child);
+                 }
+             }
+        }
+       
+           
+          return distance; 
+    }
+    
+}
+

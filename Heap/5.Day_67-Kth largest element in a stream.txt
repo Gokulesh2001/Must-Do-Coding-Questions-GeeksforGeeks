@@ -1,0 +1,60 @@
+class Solution {
+    static PriorityQueue<Integer> pq=new PriorityQueue<>();
+    static int[] kthLargest(int k, int[] arr, int n) {
+//         // code here
+        
+        
+//         if(k==1){
+//             return arr;
+//         }
+        
+        int result[]=new int[arr.length];
+        
+        
+        
+        for(int i=0;i<arr.length;i++){
+            // result[i]=-1;
+             if(pq.size() < k)
+                pq.add(arr[i]);
+            else
+            {
+                if(arr[i] >= pq.peek())
+    			{
+    				pq.remove();
+    				pq.add(arr[i]);
+    			}
+            }
+            if(pq.size() < k)
+                result[i] = -1;
+            else
+                result[i] = pq.peek();
+        }
+        
+        
+//         // for(int i=0;i<k-1;i++){
+//         //     minHeap.add(arr[i]);
+//         //     // if(minHeap.size()>k){
+//         //     //     minHeap.remove();
+//         //     // }
+//         // }
+//         // for(int i=k-1;i<arr.length;i++){
+//         //     result[i]=kthLargestInt(k,arr[i],i);
+//         // }
+        return result;
+    }
+    
+//     // static int kthLargestInt(int k, int i,int n){
+   
+//     //     //  if(minHeap.size()==4){
+//     //     //      return minHeap.remove();
+//     //     //  }
+        
+//     //         minHeap.add(i);
+//     //         // if(minHeap.size()>k){
+//     //         //     minHeap.remove();
+//     //         // }
+        
+//     //     return minHeap.remove();
+//     // }
+  
+};

@@ -1,0 +1,40 @@
+class GfG
+{
+    void buildHeap(int arr[], int n)
+    {
+        // Your code here
+        int start_index=(n/2)-1;
+        for(int i=start_index;i>=0;i--){
+            heapify(arr,n,i);
+        }
+    }
+ 
+    // To heapify a subtree rooted with node i which is
+    // an index in arr[]. n is size of heap
+    void heapify(int arr[], int n, int i)
+    {
+        // Your code here
+        int temp;
+        int largest=i;
+        int l=2*i+1;
+        int r=2*i+2;
+        
+        if(l<n&&arr[l]>arr[largest]){
+            largest=l;
+        }
+        
+        if(r<n&&arr[r]>arr[largest]){
+            largest=r;
+        }
+        
+        if(largest!=i){
+            temp=arr[largest];
+            arr[largest]=arr[i];
+            arr[i]=temp;
+            heapify(arr,n,largest);
+        }
+        
+    }
+ }
+ 
+ 

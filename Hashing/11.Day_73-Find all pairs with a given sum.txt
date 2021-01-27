@@ -1,0 +1,36 @@
+class Compute {
+    public pair[] allPairs( long a[], long b[], long n, long m, long k) {
+        // Your code goes here
+        Arrays.sort(a);
+        HashMap<Long,Long> map1=new HashMap<>();
+        HashMap<Long,Long> map2=new HashMap<>();
+        pair arr[]=new pair[(int)n];
+        
+        for(long element:a){
+            map1.put(element,map1.getOrDefault(element,(long)0)+1);
+        }
+        for(long element:b){
+            map2.put(element,map2.getOrDefault(element,(long)0)+1);
+        }
+        int index=0;
+        
+        // for(long element:b){
+        //     if(map1.getOrDefault(k-element,(long)0)>0){
+        //         arr[index++] =new pair(k-element,element);
+        //         map1.remove(k-element);
+                
+        //     }
+        // }
+        // }
+        // else{
+           for(long element:a){
+            if(map2.getOrDefault(k-element,(long)0)>0){
+                arr[index++] =new pair(element,k-element);
+                // map2.remove(k-element);
+                
+            }
+        } 
+        // }
+        return arr;
+    }
+}

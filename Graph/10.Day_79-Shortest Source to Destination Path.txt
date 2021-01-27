@@ -1,0 +1,110 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class Node
+{
+    // (x, y) represents matrix cell coordinates
+    // dist represent its minimum distance from the source
+    int x, y, dist;
+ 
+    Node(int x, int y, int dist) {
+        this.x = x;
+        this.y = y;
+        this.dist = dist;
+    }
+}
+class GFG {
+    
+    private static final int[] row = { -1, 0, 0, 1 };
+    private static final int[] col = { 0, -1, 1, 0 };
+    
+    
+   
+    
+	public static void main (String[] abc) throws IOException {
+		//code
+		BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+		int t=Integer.parseInt(br.readLine());
+		while(t-->0){
+		    String[] length=br.readLine().split(" ");
+		    int n=Integer.parseInt(length[0]);
+		    int m=Integer.parseInt(length[1]);
+		    String[] values=br.readLine().split(" ");
+		    int index=0;
+		    int[][] arr=new int[n][m];
+		    for(int i=0;i<n;i++){
+		        for(int j=0;j<m;j++){
+		            arr[i][j]=Integer.parseInt(values[index++]);
+		        }
+		    }
+		    String[] dest=br.readLine().split(" ");
+		    int x=Integer.parseInt(dest[0]);
+		    int y=Integer.parseInt(dest[1]);
+		  //  System.out.println(shortestPath(arr,x,y));
+		      BFS(arr,0,0,x,y);
+		}
+	}
+	static int a;
+	static int b;
+	static int M;
+	static int N;
+ private static void BFS(int mat[][], int i, int j, int x, int y)
+    {
+        // construct a matrix to keep track of visited cells
+        if(mat[i][j]==0 || mat[x][y]==0){
+            System.out.println(-1);
+            return;
+        }
+         M=mat.length;
+         N=mat[0].length;
+        boolean[][] visited = new boolean[M][N];
+ 
+       Queue<Node> q=new ArrayDeque<>();
+       
+       
+       q.add(new Node(i,j,0));
+       
+       visited[i][j]=true;
+       
+       int min_dist=Integer.MAX_VALUE;
+       
+       while(!q.isEmpty()){
+           Node temp=q.poll();
+           
+           i=temp.x;
+           j=temp.y;
+           int dist=temp.dist;
+           
+           if(i==x && j==y){
+               min_dist=dist;
+               break;
+           }
+           
+           for(int k=0;k<4;k++){
+               int rr=i+row[k];
+               int cc=j+col[k];
+               if(isValid(mat,visited,rr,cc)){
+                   visited[rr][cc]=true;
+                   q.add(new Node(rr,cc,dist+1));
+               }
+           }
+           
+       }
+ 
+        if (min_dist != Integer.MAX_VALUE) {
+            System.out.println(min_dist);
+        }
+        else {
+            System.out.println(-1);
+        }
+    }
+    
+     private static boolean isValid(int mat[][], boolean visited[][], int row, int col)
+    {
+        return (row >= 0) && (row < M) && (col >= 0) && (col < N)
+                        && mat[row][col] == 1 && !visited[row][col];
+    }
+	    
+	}
+	

@@ -1,0 +1,45 @@
+class Solution {
+    HashMap<Character,Integer> map=new HashMap<>();
+    boolean sameFreq(String s) {
+        // code here
+        
+        // if(s.length()==0||s.length()==1){
+        //     return true;
+        // }
+        for(char i:s.toCharArray()){
+            int count=map.getOrDefault(i,0)+1;
+            
+            map.put(i,count);
+        }
+        
+        if (allSame(s)) 
+            return true;
+        for(char i:s.toCharArray()){
+            map.put(i,map.get(i)-1);
+            if(allSame(s)==true){
+                return true;
+            }
+            map.put(i,map.get(i)+1);
+        }
+        
+      return false;  
+    }
+    boolean allSame(String s){
+        int same=0;
+        int i;
+        for( i=0;i<s.length();i++){
+            if(0<map.get(s.charAt(i))){
+                same=map.get(s.charAt(i));
+                break;
+            }
+        }
+        
+        for(int j = i + 1; j < s.length(); j++){
+            if(same!=map.get(s.charAt(j))&&map.get(s.charAt(j))>0){
+                return false;
+            }
+            
+        }
+        return true;
+    }
+}

@@ -1,0 +1,39 @@
+import java.util.*;
+public class Main
+{
+    
+  
+    
+    int maxSubarraySum(int arr[], int n){
+        
+        // Your code here
+        
+        int max_so_far=Integer.MIN_VALUE,max_sum=0;
+        for(int i=0;i<=n-1;i++){
+            max_sum+=arr[i];
+            if(max_so_far<max_sum){
+                max_so_far=max_sum;
+            }
+            if(max_sum<0){
+                max_sum=0;
+            }
+            
+            
+        }
+        
+    
+     return max_so_far;   
+    }
+    
+    
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		int n=sc.nextInt();
+		int[] arr=new int[n];
+		for(int i=0;i<=n-1;i++){
+		    arr[i]=sc.nextInt();
+		}
+		Main ob=new Main();
+		System.out.println("The maxSum is "+ob.maxSubarraySum(arr,n));
+	}
+}

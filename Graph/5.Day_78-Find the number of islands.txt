@@ -1,0 +1,71 @@
+class Solution
+{
+    
+    public int numIslands(char[][] grid)
+    {
+        // Code here
+        int count=0;
+        int n=grid.length;
+        int m=grid[0].length;
+        boolean visited[][]=new boolean[grid.length][grid[0].length];
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(grid[i][j]=='1' && !visited[i][j]){
+                   
+                    dfs(grid,i,j,visited);
+                     count++;
+                    
+                }
+            }
+        }
+        return count;
+    }
+    public void dfs(char[][] grid,int i,int j,boolean visited[][]){
+        // if(isSafe(grid,x,y,visited)==false){
+        //     return;
+        // }
+        // visited[x][y]=true;
+        
+        // if(isSafe(grid,x-1,y-1,visited)){
+        //   dfs(grid,x-1,y-1,visited);
+        // }
+        // if(isSafe(grid,x-1,y,visited)){
+        //   dfs(grid,x-1,y,visited);
+        // }
+        // if(isSafe(grid,x-1,y+1,visited)){
+        //   dfs(grid,x-1,y+1,visited);
+        // }
+        // if(isSafe(grid,x,y-1,visited)){
+        //   dfs(grid,x,y-1,visited);
+        // }
+        // if(isSafe(grid,x,y+1,visited)){
+        //   dfs(grid,x,y+1,visited);
+        // }
+        // if(isSafe(grid,x+1,y-1,visited)){
+        //   dfs(grid,x+1,y-1,visited);
+        // }
+        // if(isSafe(grid,x+1,y,visited)){
+        //   dfs(grid,x+1,y,visited);
+        // }
+        // if(isSafe(grid,x+1,y+1,visited)){
+        //   dfs(grid,x+1,y+1,visited);
+        // }
+        if (i < 0 || j < 0 || i >= grid.length || j >= grid[0].length || grid[i][j] == '0')
+        return;
+       grid[i][j] = '0';
+       dfs(grid,i-1,j-1,visited);
+       dfs(grid,i-1,j,visited);
+       dfs(grid,i-1,j+1,visited);
+       dfs(grid,i,j-1,visited);
+       dfs(grid,i,j+1,visited);
+       dfs(grid,i+1,j-1,visited);
+       dfs(grid,i+1,j,visited);
+       dfs(grid,i+1,j+1,visited);
+    }
+    public boolean isSafe(char[][] grid,int x,int y,boolean visited[][]){
+      return x>=0 &&x<grid.length && y>=0 && y<grid[0].length && grid[x][y]=='1' && !visited[x][y];
+        
+        
+    }
+    
+}

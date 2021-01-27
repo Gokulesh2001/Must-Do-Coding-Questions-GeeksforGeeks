@@ -1,0 +1,19 @@
+class GfG
+{
+    int strstr(String str, String target)
+    {
+       // Your code here
+       
+       for(int i=0;i<str.length();i++){
+           try{
+          if((str.substring(i,i+target.length() )).equals(target)==true){
+              return i;
+          }
+           }
+           catch(StringIndexOutOfBoundsException ex){
+               
+           }
+       }
+       return -1;
+    }
+}

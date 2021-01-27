@@ -1,0 +1,71 @@
+/*package whatever //do not write package name here */
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class GFG {
+    
+	public static void main (String[] args) throws IOException {
+		//code
+		
+		
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int t = Integer.parseInt(br.readLine().trim()); //Inputting the testcases
+		while(t-->0){
+		    int n = Integer.parseInt(br.readLine().trim());
+		    int arr[] = new int[n];
+		    String inputLine[] = br.readLine().trim().split(" ");
+		    for(int i=0; i<n; i++){
+		        arr[i] = Integer.parseInt(inputLine[i]);
+		    }
+		    Solution obj=new Solution();
+		    System.out.println(obj.maxWater(arr, n));
+		}
+// 		Scanner sc=new Scanner(System.in);
+	
+		
+// 	int T=sc.nextInt();
+// 	int tc=0;
+	
+// 	Solution obj=new Solution();
+// 	while(tc<T){
+// 	    int n=sc.nextInt();
+// 	    int[] arr=new int[n];
+// 		    for(int i=0;i<=n-1;i++){
+// 		        arr[i]=sc.nextInt();
+// 		    }
+	    
+// 	    System.out.println(obj.maxWater(arr,n));
+// 	    tc++;
+// 	}
+		
+		
+		
+	}
+}
+class Solution {
+    public static int maxWater(int arr[], int n) {
+        // code here
+         
+		    
+		    int res=0;
+		    int[] left=new int[n];
+		    int[] right=new int[n];
+		       left[0]=arr[0];
+		       for(int j=1;j<n;j++){
+		           left[j]=Math.max(left[j-1],arr[j]);
+		       }
+		       
+		       right[n-1]=arr[n-1];
+		       for(int k=n-2;k>=0;k--){
+		           right[k]=Math.max(right[k+1],arr[k]);
+		       }
+		      
+		       for(int i=0;i<=n-1;i++){
+		       res+=Math.min(left[i],right[i])-arr[i];
+		    }
+		    return res;
+    }
+}
+

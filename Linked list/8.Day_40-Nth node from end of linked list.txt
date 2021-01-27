@@ -1,0 +1,36 @@
+class GfG
+{
+    // Function to find the nth node from end in the linked list
+    // head: head of the linked list
+    // n: nth node from end to find
+    int getNthFromLast(Node head, int n)
+    {
+    	// Your code here
+    	int countNode=count(head);
+    	int i=0;
+    	Node pointer=head;
+    	if(countNode<n){
+    	    return -1;
+    	}
+    	while(i<(countNode-n)){
+    	    try{
+    	    pointer=pointer.next;
+    	    }
+    	    catch(NullPointerException ex){
+    	        
+    	    }
+    	    i+=1;
+    	}
+    	return pointer.data;
+    }
+    
+    int count(Node head){
+        Node current=head;
+        int count=0;
+        while(current!=null){
+            count+=1;
+            current=current.next;
+        }
+        return count;
+    }
+}

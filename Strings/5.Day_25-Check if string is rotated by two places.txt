@@ -1,0 +1,36 @@
+class Rotation{
+    
+    /*  Function to check if two strings are rotated
+    *   s1, s2: input strings
+    */
+    public static boolean isRotated(String s1, String s2){
+        
+        // Your code here
+        if(s1.length()<=2&&s1.equals(s2)==true){
+            return true;
+        }
+        if(s1.length()>2&&s1.equals(s2)==true){
+            return false;
+        }
+        if(s1.length()==0||s2.length()==0){
+            return false;
+        }
+        if(s1.length()==1||s2.length()==1){
+            return false;
+        }
+        for(int i=0;i<s1.length();i++){
+            try{
+            s2=(s2.charAt(s2.length()-1)+"").concat((s2.substring(0,s2.length()-1)));
+            }
+            catch(StringIndexOutOfBoundsException ex){
+                
+            }
+            if(s1.equals(s2)==true){
+                
+            return true;
+        }
+        }
+        return false;
+    }
+    
+}

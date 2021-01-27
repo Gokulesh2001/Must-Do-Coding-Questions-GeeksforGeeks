@@ -1,0 +1,23 @@
+public static boolean check(long arr[],long brr[],int n)
+{
+    //Your code here
+   
+    HashMap<Long,Integer> map1=new HashMap<>();
+    HashMap<Long,Integer> map2=new HashMap<>();
+    
+    for(Long element:arr){
+        map1.put(element,map1.getOrDefault(element,0)+1);
+    }
+    for(Long element:brr){
+        map2.put(element,map2.getOrDefault(element,0)+1);
+    }
+    
+    for(Long element:arr){
+        if(map1.get(element)!=map2.getOrDefault(element,0)){
+            return false;
+        }
+    }
+    
+    
+   return true; 
+}

@@ -1,0 +1,23 @@
+class Merge
+{
+    Node mergeKList(Node[]a,int N)
+    {
+        //Add your code here.
+        PriorityQueue<Integer> minHeap=new PriorityQueue<>();
+        for(Node head:a){
+            while(head!=null){
+                minHeap.add(head.data);
+                head=head.next;
+            }
+        }
+        
+        Node dummy=new Node(-1);
+        Node head=dummy;
+        while(!minHeap.isEmpty()){
+            head.next=new Node(minHeap.remove());
+            head=head.next;
+        }
+        
+        return dummy.next;
+    }
+}

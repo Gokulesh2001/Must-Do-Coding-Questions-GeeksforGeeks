@@ -1,0 +1,31 @@
+class Solution {
+   
+    public static String removeDups(String S) {
+        // code here
+        
+        
+        
+        
+        ArrayList<String> list=new ArrayList<String>();
+        list.add("");
+        String str="";
+        
+        for(int i=0;i<S.length();i++){
+            if(inIt(S.charAt(i),list)==false){
+                str=str.concat(S.charAt(i)+"");
+                list.add(S.charAt(i)+"");
+            }
+        }
+      return str;  
+    }
+    public static boolean inIt(char ch,ArrayList<String> list){
+            for(int j=0;j<list.size();j++){
+                if((ch+"").equals(list.get(j))==true){
+                    return true;
+                }
+            }
+           return false; 
+        }
+    
+     
+}

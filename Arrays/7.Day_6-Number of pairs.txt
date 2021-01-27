@@ -1,0 +1,60 @@
+
+class Num_of_pair
+{
+    // Function to count number of pairs of x, y
+    // x[], y[]: input array elements
+    // n, m: size of arrays x[] and y[] respectively
+    int binary(int m,int y[],int x){
+        int last=m-1,first=0;
+        int ans=last+1;
+        while(last>=first){
+            int mid=(first+last)/2;
+            if(y[mid]>x){
+                ans=mid;
+                last=mid-1;
+            }
+            else{
+                first=mid+1;
+            }
+        }
+        return ans;
+    }
+    
+     long countPairs(int x[], int y[], int n, int m)
+    {
+        // your code here
+        int[] freq=new int[5];
+        for(int i=0;i<=m-1;i++){
+            if(y[i]<5){
+                freq[y[i]]++;
+            }
+        }
+        Arrays.sort(y);
+        long ans=0;
+        
+         for(int i=0;i<=n-1;i++){
+        if(x[i]==0){
+            continue;
+        }
+        if(x[i]==1){
+            ans+=freq[0];
+            continue;
+        }
+        
+        int ind=binary(m,y,x[i]);
+        
+        ans=ans+(m-ind)+freq[0]+freq[1];
+        
+        if(x[i]==2){
+            ans=ans-freq[3]-freq[4];
+        }
+        
+        if(x[i]==3){
+            ans=ans+freq[2];
+        }
+    }
+    return ans;
+    
+    }
+    
+}

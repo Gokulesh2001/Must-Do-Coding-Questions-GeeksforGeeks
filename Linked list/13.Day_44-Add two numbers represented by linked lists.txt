@@ -1,0 +1,135 @@
+class Solution{
+    static Node addLists(Node first, Node second){
+        // code here
+        // return head of sum list
+        if(second==null){
+            return first;
+        }
+        if(first==null){
+            return second;
+        }
+        String str1="";
+        String str2="";
+        while(first!=null){
+            str1=str1.concat(String.valueOf(first.data));
+            first=first.next;
+        }
+          while(second!=null){
+            str2=str2.concat(String.valueOf(second.data));
+            second=second.next;
+        }
+        
+        BigInteger ans=new BigInteger(Double.parseDouble(str1)+Double.parseDouble(str2));
+        
+      
+        System.out.println(ans);
+        String ansStr=String.valueOf(ans);
+        
+        
+        Node result=new Node(Integer.parseInt(""+ansStr.charAt(0)));
+        // Node result=result1;
+        Node curr=result;
+        for(int i=1;i<ansStr.length()-1;i++){
+            try{
+            curr.next=new Node(Integer.parseInt(""+ansStr.charAt(i)));
+            curr=curr.next;
+            }
+            catch(NumberFormatException ex){
+                
+            }
+            
+        }
+        curr=null;
+        
+        
+        return result;
+        
+    }
+}
+
+
+
+--------------------------------------------------------------------------------------------------------------------------
+class Solution{
+      Node addLists(Node first, Node second){
+ // res is head node of the resultant list
+      Node firstt=reverseList(first);
+      Node secondd=reverseList(second);
+        Node res = null;
+        Node prev = null;
+        Node temp = null;
+        int carry = 0, sum;
+ 
+        // while both lists exist
+        while (firstt != null || secondd != null) {
+            // Calculate value of next digit in resultant
+            // list. The next digit is sum of following
+            // things (i) Carry (ii) Next digit of first
+            // list (if there is a next digit) (ii) Next
+            // digit of second list (if there is a next
+            // digit)
+            sum = carry + (firstt != null ? firstt.data : 0)
+                  + (secondd != null ? secondd.data : 0);
+ 
+            // update carry for next calulation
+            carry = (sum >= 10) ? 1 : 0;
+ 
+            // update sum if it is greater than 10
+            if(sum>=10){
+        sum = sum % 10;
+            }
+            
+ 
+            // Create a new node with sum as data
+            temp = new Node(sum);
+ 
+            // if this is the first node then set it as head
+            // of the resultant list
+            if (res == null) {
+                res = temp;
+            }
+ 
+            // If this is not the first
+            // node then connect it to the rest.
+            else {
+                prev.next = temp;
+            }
+ 
+            // Set prev for next insertion
+            prev = temp;
+ 
+            // Move first and second pointers to next nodes
+            if (firstt != null) {
+                firstt = firstt.next;
+            }
+            if (secondd != null) {
+                secondd= secondd.next;
+            }
+        }
+ 
+        if (carry > 0) {
+            temp.next = new Node(carry);
+        }
+ 
+        // return head of the resultant list
+        return reverseList(res);
+        
+    }
+    Node reverseList(Node head)
+    {
+         if (head == null || head.next == null) 
+            return head; 
+ 
+        /* reverse the rest list and put 
+        the first element at the end */
+        Node rest = reverseList(head.next); 
+        head.next.next = head; 
+ 
+        /* tricky step -- see the diagram */
+        head.next = null; 
+ 
+        /* fix the head pointer */
+        return rest;    
+    }
+    
+}

@@ -1,0 +1,15 @@
+class GfG
+{
+    int atoi(String str)
+    {
+	// Your code here
+	int atoi=-1;
+	try{
+	atoi=Integer.parseInt(str);
+	}
+	catch(NumberFormatException ex){
+	    
+	}
+	return atoi;
+    }
+}

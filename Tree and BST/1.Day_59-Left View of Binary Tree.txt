@@ -1,0 +1,37 @@
+class Tree
+{
+    ArrayList<Integer> leftView(Node root)
+    {
+      // Your code here
+      
+      ArrayList<Integer> list=new ArrayList<Integer>();
+      if(root==null){
+          return list;
+      }
+      Queue<Node> queue = new LinkedList<>();
+        queue.add(root);
+       while (!queue.isEmpty()) {
+            // number of nodes at current level
+            int n = queue.size();
+ 
+            // Traverse all nodes of current level
+            for (int i = 1; i <= n; i++) {
+                Node temp = queue.poll();
+ 
+                // Print the left most element at
+                // the level
+                if (i == 1)
+                    list.add(temp.data);
+ 
+                // Add left node to queue
+                if (temp.left != null)
+                    queue.add(temp.left);
+ 
+                // Add right node to queue
+                if (temp.right != null)
+                    queue.add(temp.right);
+            }
+        }
+      return list;
+    }
+}

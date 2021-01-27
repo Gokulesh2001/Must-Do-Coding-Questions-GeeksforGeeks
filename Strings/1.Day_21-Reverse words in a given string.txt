@@ -1,0 +1,27 @@
+class Solution {
+    String reverseWords(String S) {
+        // code here 
+        
+        String str="";
+        
+
+ String[] arrOfStr = S.split("[.]");
+
+     
+ List<String> list = Arrays.asList(arrOfStr);
+ Collections.reverse(list);
+ 
+ String[] array = list.toArray(new String[0]);
+ 
+        for (int i=0;i<=arrOfStr.length-2;i++) 
+            str=str.concat(array[i]+".");
+        str=str.concat(array[arrOfStr.length-1]);    
+     return str;       
+    }
+    
+    
+    
+    
+
+
+    }

@@ -1,0 +1,63 @@
+/*package whatever //do not write package name here */
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class GFG {
+    
+	public static void main (String[] args) throws IOException {
+		//code
+		
+		
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int t = Integer.parseInt(br.readLine().trim()); //Inputting the testcases
+		while(t-->0){
+		    int n = Integer.parseInt(br.readLine().trim());
+		    String arr[] = new String[n];
+		    String inputLine[] = br.readLine().trim().split(" ");
+		    for(int i=0; i<n; i++){
+		        arr[i] = inputLine[i];
+		    }
+		    Solution obj=new Solution();
+		    System.out.println(obj.Prefix(arr, n)==""?-1:obj.Prefix(arr, n));
+		}
+
+		
+		
+	}
+}
+class Solution {
+    public static String Prefix(String arr[], int n) {
+        int count=0;
+        int flag;
+        int smallest = Integer.MAX_VALUE;
+        char temp;
+        
+        String str="";
+
+for (int i = 0; i < arr.length; i++) {
+  if (arr[i].length() < smallest) {
+     smallest = arr[i].length();
+    
+  }
+}
+        while(count<smallest){
+        for(int i=0;i<arr.length;i++){
+            temp=arr[0].charAt(count);
+            
+            if(arr[i].charAt(count)!=temp){
+               
+                return str;
+            }
+            
+        }
+       
+           str=str.concat(arr[0].charAt(count)+""); 
+        count+=1;
+        }
+        
+        return str;
+}
+}
+

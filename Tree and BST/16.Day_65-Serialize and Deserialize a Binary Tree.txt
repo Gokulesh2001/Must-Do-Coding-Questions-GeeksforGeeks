@@ -1,0 +1,27 @@
+class Tree {
+   
+	public void serialize(Node root, ArrayList<Integer> A) {
+	    if(root==null){
+	        A.add(-1);
+	        return;
+	    }
+	    A.add(root.data);
+	    serialize(root.left,A);
+	    serialize(root.right,A);
+	
+	}
+	
+	
+	int deserialization=0;
+    public Node deSerialize(ArrayList<Integer> A){
+        if(A.get(deserialization)==-1){
+            deserialization++;
+            return null;
+        }
+        
+        Node newnode=new Node(A.get(deserialization++));
+        newnode.left=deSerialize(A);
+        newnode.right=deSerialize(A);
+        return newnode;
+    }
+};

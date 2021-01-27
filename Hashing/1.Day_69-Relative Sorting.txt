@@ -1,0 +1,50 @@
+public static void sortA1ByA2(int A1[], int N, int A2[], int M)
+{
+   
+         TreeMap<Integer,Integer> freq=new TreeMap<Integer,Integer>();
+    
+    for(int i = 0; i < N; i++){
+        if(freq.get(A1[i])==null){
+           freq.put(A1[i],1); 
+        }
+        else{
+            int c=freq.get(A1[i]);
+            
+             freq.put(A1[i],c+1);
+        }
+    }
+    
+    System.out.println(freq.get(8));
+    int index=0;
+    for(int j = 0; j < M; j++){
+         int n=freq.getOrDefault(0,A2[j]);
+        
+        while(n-->0){
+            if(index<A1.length){
+                
+            A1[index++]=A2[j];
+            
+            
+            }
+        }
+        
+        freq.remove(A2[j]);
+    }
+    Set<Entry<Integer,Integer>> entries = freq.entrySet();
+    for(Entry entry:freq.entrySet() ){
+        int count=(int)entry.getValue();
+        
+         while(count-->0){
+             if(index<A1.length){
+                 
+                   
+                 
+                A1[index++]=(int)entry.getKey();
+                
+             }
+        }
+        
+    }
+    
+    
+}
