@@ -1,0 +1,127 @@
+class Solution
+{
+    
+    // static final int CHARS = 26; 
+  
+// No. of vertices 
+int V;  
+  
+// A dynamic array of adjacency lists 
+static ArrayList<ArrayList<Integer>> adj;  
+static int[] in; 
+  int CHARS=26;
+// Constructor 
+
+
+static void addEdge(int v, int w) 
+{ 
+    adj.get(v).add(w); 
+    in[w]++; 
+} 
+
+static boolean isEulerianCycle(int V){
+    if(!isSC(V,adj)){
+        return false;
+    }
+    else{
+        for(int i = 0; i < V; i++) 
+       if (adj.get(i).size() != in[i]) 
+           return false; 
+    }
+    return true;
+}
+    static int isCircle(int N, String A[])
+    {
+        // code here
+        int V=26;
+        in = new int[V]; 
+    adj = new ArrayList<>(V); 
+      
+    for(int i = 0; i < V; i++) 
+    { 
+       adj.add(i, new ArrayList<>()); 
+    } 
+        
+        for(int i = 0; i < N; i++) {
+            String str=A[i];
+            addEdge(str.charAt(0) - 'a',  
+                 str.charAt(str.length() - 1) - 'a');
+        }
+        
+        return isEulerianCycle(V)?1:0; 
+    }
+    
+    
+     static Stack<Integer> st=new Stack<Integer>();
+    static boolean visited[];
+    static boolean visited2[];
+    static HashSet<Integer> set2=new HashSet<Integer>();
+    public static boolean isSC(int V, ArrayList<ArrayList<Integer>> adj) {
+        //code here
+        visited=new boolean[V];
+        visited2=new boolean[V];
+        ArrayList<ArrayList<Integer>> transAdj=new ArrayList<ArrayList<Integer>>();
+        int countSCC=0;
+        for (int v = 0; v < V; v++){
+            transAdj.add(new ArrayList<Integer>());
+        }
+        for (int v = 0; v < V; v++) 
+        { 
+            // Recur for all the vertices adjacent to this vertex 
+                List<Integer> list=adj.get(v);
+                for(Integer child:list){
+                transAdj.get(child).add(v); 
+                }
+        } 
+        for(int i=0;i<V;i++){
+            if(!visited[i]){
+            dfsOfGraph(i,adj);
+            }
+        }
+        
+        while(!st.isEmpty()){
+            int temp=st.peek();
+            if(visited2[temp]){
+                st.pop();
+                continue;
+            }
+            dfsOfGraphRev(temp,transAdj);
+            countSCC++;
+        }
+       if(countSCC==0)
+         return false; 
+         
+    return true;
+    }
+    
+    public static void dfsOfGraph(int s, ArrayList<ArrayList<Integer>> adj){
+        visited[s]=true;
+        
+        
+        
+        for(int i=0;i<adj.get(s).size();i++){
+            if(visited[adj.get(s).get(i)]==false){
+                
+                dfsOfGraph(adj.get(s).get(i),adj);
+                
+            }
+        }
+        st.push(s);
+        
+    }
+    public static void dfsOfGraphRev(int s, ArrayList<ArrayList<Integer>> adj){
+        visited2[s]=true;
+        
+        
+        
+        for(int i=0;i<adj.get(s).size();i++){
+            if(visited2[adj.get(s).get(i)]==false){
+                
+                dfsOfGraphRev(adj.get(s).get(i),adj);
+                
+            }
+        }
+        
+        
+    }
+}

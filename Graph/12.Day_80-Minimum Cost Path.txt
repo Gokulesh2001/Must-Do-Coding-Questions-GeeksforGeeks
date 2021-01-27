@@ -1,0 +1,182 @@
+Solution 1-Time limit exceeded :
+
+class Node
+{
+    // (x, y) represents matrix cell coordinates
+    // dist represent its minimum distance from the source
+    int x, y, dist;
+ 
+    Node(int x, int y, int dist) {
+        this.x = x;
+        this.y = y;
+        this.dist = dist;
+    }
+}
+class Solution
+{
+    
+    private static final int[] row = { -1, 0, 0, 1 };
+    private static final int[] col = { 0, -1, 1, 0 };
+    static int ROW;
+    static int COL;
+    static boolean isInsideGrid(int i, int j)
+{
+    return (i >= 0 && i < ROW &&
+            j >= 0 && j < COL);
+}
+    public static int minimumCostPath(int[][] grid)
+    {
+        // Code here
+        int v=grid.length;
+        int u=grid[0].length;
+        ROW=v;
+        COL=u;
+        int[][] dist=new int[v][u];
+        boolean[][] visited = new boolean[v][u];
+        
+        for(int i = 0; i < v; i++)
+    {
+        for(int j = 0; j < u; j++)
+        {
+            dist[i][j] = Integer.MAX_VALUE;
+        }
+    }
+        
+        dist[0][0]=grid[0][0];
+        
+        PriorityQueue<Node> pq = new PriorityQueue<Node>((a,b)->b.dist-a.dist);
+        pq.add(new Node(0,0,dist[0][0]));
+        while(!pq.isEmpty()){
+            Node p=pq.poll();
+            visited[p.x][p.y]=true;
+           
+             for(int k=0;k<4;k++){
+               int rr=p.x+row[k];
+               int cc=p.y+col[k];
+               if(isInsideGrid(rr,cc) && dist[rr][cc] ){
+                  if (dist[rr][cc] > dist[p.x][p.y] +  grid[rr][cc]){
+                       if (dist[rr][cc] != Integer.MAX_VALUE)
+                    {
+                        Node adj = new Node(rr, cc, 
+                                       dist[rr][cc]);
+                                       
+                        pq.remove(adj);
+                    } 
+                    dist[rr][cc] = dist[p.x][p.y] +
+                                       grid[rr][cc];
+                                       
+                    pq.add(new Node(rr, cc, 
+                               dist[rr][cc]));
+                    
+                    }
+               }
+           }
+        }
+        return dist[v - 1][u - 1];
+    }
+    
+    
+}
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------
+Correct Answer:
+
+class Node
+{
+    // (x, y) represents matrix cell coordinates
+    // dist represent its minimum distance from the source
+    int x, y, dist;
+ 
+    Node(int x, int y, int dist) {
+        this.x = x;
+        this.y = y;
+        this.dist = dist;
+    }
+    
+}
+class Solution
+{
+    static class distanceComparator implements Comparator<Node> 
+{ 
+    public int compare(Node a, Node b) 
+    { 
+        if (a.dist < b.dist) 
+        { 
+            return -1; 
+        } 
+        else if (a.dist > b.dist) 
+        { 
+            return 1; 
+        } 
+        else {return 0;} 
+    } 
+} 
+    
+    private static final int[] row = { -1, 0, 0, 1 };
+    private static final int[] col = { 0, -1, 1, 0 };
+    static int ROW;
+    static int COL;
+    static boolean isInsideGrid(int i, int j)
+{
+    return (i >= 0 && i < ROW &&
+            j >= 0 && j < COL);
+}
+    public static int minimumCostPath(int[][] grid)
+    {
+        // Code here
+        int v=grid.length;
+        int u=grid[0].length;
+        ROW=v;
+        COL=u;
+        int[][] dist=new int[v][u];
+        boolean[][] visited=new boolean[v][u];
+        
+        for(int i = 0; i < v; i++)
+    {
+        for(int j = 0; j < u; j++)
+        {
+            dist[i][j] = Integer.MAX_VALUE;
+        }
+    }
+        
+        dist[0][0]=grid[0][0];
+        
+        PriorityQueue<Node> pq = new PriorityQueue<Node>( 
+                  ROW * COL, new distanceComparator());
+        pq.add(new Node(0,0,dist[0][0]));
+        while(!pq.isEmpty()){
+            Node p=pq.poll();
+           
+           
+             for(int k=0;k<4;k++){
+               int rr=p.x+row[k];
+               int cc=p.y+col[k];
+               if(isInsideGrid(rr,cc)){
+                  if (dist[rr][cc] > dist[p.x][p.y] +  grid[rr][cc]){
+                       if (dist[rr][cc] != Integer.MAX_VALUE)
+                    {
+                        Node adj = new Node(rr, cc, 
+                                       dist[rr][cc]);
+                                       
+                        pq.remove(adj);
+                    } 
+                    
+                    dist[rr][cc] = dist[p.x][p.y] +
+                                       grid[rr][cc];
+                                       
+                    pq.add(new Node(rr, cc, 
+                               dist[rr][cc]));
+                    
+                    
+                    }
+               }
+           }
+        }
+        return dist[v - 1][u - 1];
+    }
+    
+    
+}
