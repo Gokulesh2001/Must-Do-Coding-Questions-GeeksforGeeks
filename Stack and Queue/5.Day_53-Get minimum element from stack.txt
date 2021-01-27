@@ -1,0 +1,71 @@
+class GfG
+{
+    int minEle;
+    Stack<Integer> s=new Stack<Integer>();
+
+    /*returns min element from stack*/
+    int getMin() 
+    { 
+        // Get the minimum number in the entire stack 
+        if (s.isEmpty()) 
+            return -1; 
+  
+        // variable minEle stores the minimum element 
+        // in the stack. 
+        else
+            return minEle;
+    } 
+  
+    // prints top element of MyStack 
+    
+  
+    // Removes the top element from MyStack 
+    int pop() 
+    { 
+        if (s.isEmpty()) 
+        { 
+            
+            return -1; 
+        } 
+  
+        
+        Integer t = s.pop(); 
+  
+        // Minimum will change as the minimum element 
+        // of the stack is being removed. 
+        if (t < minEle) 
+        { 
+           int hello=minEle;
+            minEle = 2*minEle - t; 
+            return hello;
+        } 
+  
+        else
+           return t;
+    } 
+  
+    // Insert new number into MyStack 
+    void push(Integer x) 
+    { 
+        if (s.isEmpty()==true) 
+        { 
+            minEle = x; 
+            s.push(x); 
+            
+            return; 
+        } 
+  
+        // If new number is less than original minEle 
+        if (x < minEle) 
+        { 
+            s.push(2*x - minEle); 
+            minEle = x; 
+        } 
+  
+        else
+            s.push(x); 
+  
+        
+    } 
+}
+

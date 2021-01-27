@@ -1,0 +1,23 @@
+class solve{
+    public static long[] nextLargerElement(long[] arr, int n) { 
+        // Your code here
+        int i, j; 
+        long next;
+        long[] arrNew=new long[n];
+        for (i=0; i<n; i++) 
+        { 
+            next = -1; 
+            for (j = i+1; j<n; j++) 
+            { 
+                if (arr[i] < arr[j]) 
+                { 
+                    next = arr[j]; 
+                    break; 
+                } 
+            } 
+            arrNew[i]=next;
+        } 
+        return arrNew;
+    
+    } 
+}

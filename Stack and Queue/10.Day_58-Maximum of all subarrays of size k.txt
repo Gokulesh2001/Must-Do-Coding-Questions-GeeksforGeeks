@@ -1,0 +1,55 @@
+class solve{
+    static ArrayList <Integer> max_of_subarrays(int arr[], int n, int k)
+    {
+        // Your code here
+         int j, max;
+          ArrayList<Integer> list=new ArrayList<>();
+ 
+        for (int i = 0; i <= n - k; i++) {
+ 
+            max = arr[i];
+ 
+            for (j = 1; j < k; j++) {
+                if (arr[i + j] > max)
+                    max = arr[i + j];
+            }
+            list.add(max);
+        }
+    //     Queue<Integer> q=new LinkedList<>();
+    //     Queue<Integer> qq=new LinkedList<>();
+    //     int array[]=new int[k];
+        
+    //     ArrayList<Integer> list=new ArrayList<>();
+    //     for(int i=0;i<k;i++){
+    //         q.add(arr[i]);
+    //     }
+        
+    //     for(int j=k;j<=n;j++){
+    //         int l=0;
+    //         while(l<k){
+    //             array[l]=q.peek();
+    //             if(!q.isEmpty()){
+    //             qq.add(q.peek());
+    //             }
+    //           q.remove();
+    //           l++;
+    //         }
+    //         Arrays.sort(array);
+                    
+
+    //         list.add(array[k-1]);
+    //         if(j==n){
+    //             break;
+    //         }
+            
+    //         Queue<Integer> temp=q;
+    //         q=qq;
+    //         qq=temp;
+    //         q.remove();
+    //         q.add(arr[j]);
+    //     }
+        return list;
+    }
+    
+    
+}
