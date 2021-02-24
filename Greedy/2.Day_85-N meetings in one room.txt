@@ -1,0 +1,33 @@
+
+class Meeting {
+    public static int maxMeetings(int start[], int end[], int n) {
+        // add your code here
+    ActivityTime[] at=new ActivityTime[n];
+        for(int i=0;i<n;i++){
+            at[i]=new ActivityTime(start[i],end[i]);
+        }
+        Arrays.sort(at,new Comparator<ActivityTime>(){
+            public int compare(ActivityTime at1,ActivityTime at2){
+                return at1.e-at2.e;
+            } 
+        });
+        int res=0;
+        int last_et=0;
+        for(int i=0;i<n;i++){
+            if(at[i].s>last_et){
+                res++;
+                
+                last_et=at[i].e;
+            }
+        }
+        return res;
+    }
+}
+class ActivityTime{
+    int s;
+    int e;
+    ActivityTime(int s,int e){
+        this.s=s;
+        this.e=e;
+    }
+}

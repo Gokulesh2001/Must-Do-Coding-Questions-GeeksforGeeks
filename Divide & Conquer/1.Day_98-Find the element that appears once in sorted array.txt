@@ -1,0 +1,12 @@
+class Solution 
+{
+    int findOnce(int arr[], int n)
+    {
+        // Complete this function
+        int result=arr[0];
+        for(int i=1;i<n;i++){
+           result^=arr[i];
+        }
+        return result;
+    }
+}

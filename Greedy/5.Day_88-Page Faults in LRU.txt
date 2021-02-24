@@ -1,0 +1,60 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class GFG {
+	public static void main (String[] args) throws IOException {
+		//code
+		BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+		int t=Integer.parseInt(br.readLine());
+		while(t-->0){
+		   int n=Integer.parseInt(br.readLine());
+		   int[] arr=new int[n];
+		   	String input[]=br.readLine().split(" ");
+		   	for(int i=0;i<n;i++){
+		   	    arr[i]=Integer.parseInt(input[i]);
+		   	}
+		   int m=Integer.parseInt(br.readLine());
+		   System.out.println(lru(n,m,arr));
+		}
+		
+	}
+	public static int lru(int n,int m,int[] arr){
+	    
+	    
+	    ArrayList<Integer> s=new ArrayList<>(); 
+        int count=0; 
+        int page_faults=0; 
+        for(int i:arr) 
+        { 
+            // Insert it into set if not present 
+            // already which represents page fault 
+            if(!s.contains(i)) 
+            { 
+              
+            // Check if the set can hold equal pages 
+            if(s.size()==m) 
+            { 
+                s.remove(0); 
+                s.add(m-1,i); 
+            } 
+            else
+                s.add(count,i); 
+                // Increment page faults 
+                page_faults++; 
+                ++count; 
+          
+            } 
+            else
+            { 
+                // Remove the indexes page 
+                s.remove((Object)i); 
+                // insert the current page 
+                s.add(s.size(),i);          
+            } 
+          
+        } 
+	    return page_faults;
+	}
+		
+	}

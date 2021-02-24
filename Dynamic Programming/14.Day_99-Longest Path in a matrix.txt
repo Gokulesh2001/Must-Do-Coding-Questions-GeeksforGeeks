@@ -1,0 +1,74 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class GFG {
+	public static void main (String[] args) throws Exception {
+		//code
+		BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+		int t=Integer.parseInt(br.readLine());
+		while(t-->0){
+		    String input2[]=br.readLine().split(" ");
+		    int n=Integer.parseInt(input2[0]);
+		    String input[]=br.readLine().split(" ");
+		    int arr[][]=new int[n][n];
+		    int index=0;
+		    for(int i=0;i<n;i++){
+		      for(int j=0;j<n;j++){
+		        arr[i][j]=Integer.parseInt(input[index++]);
+		    }  
+		    }
+		    int[][] dp = new int[n][n]; 
+		    
+		    int result = 1; 
+        for (int i = 0; i < n; i++) 
+            for (int j = 0; j < n; j++) 
+                dp[i][j] = -1; 
+                
+                for (int i = 0; i < n; i++)  
+            for (int j = 0; j < n; j++) 
+                if (dp[i][j] == -1) 
+                    longestPath(i, j, arr, dp); 
+                    
+                    for (int k = 0; k < n; k++) {
+                      for (int l = 0; l< n; l++){ 
+                         result=Math.max(result,dp[k][l]);
+                         System.out.print(dp[k][l]+" ");
+                         
+                      }
+                         System.out.println();
+                    }
+		    System.out.println(result);
+		
+	}
+		}
+		
+	
+	static int longestPath(int i,int j,int[][] arr,int dp[][]){
+	    if (i < 0 || i >= arr.length || j < 0 || j >= arr.length) 
+            return 0; 
+            
+          
+          if(dp[i][j]!=-1) {
+              return dp[i][j];
+          } 
+          int x=0,y=0,z=0,w=0;
+          if(i>0 && (arr[i][j]+1)==arr[i-1][j]){
+             x= dp[i][j]=1+longestPath(i-1,j,arr,dp);
+          }
+          
+          if(j>0 && (arr[i][j]+1)==arr[i][j-1]){
+             y= dp[i][j]=1+longestPath(i,j-1,arr,dp);
+          }
+          
+          if(i<arr.length-1 && (arr[i][j]+1)==arr[i+1][j]){
+             z= dp[i][j]=1+longestPath(i+1,j,arr,dp);
+          }
+          
+          if(j<arr.length-1 && (arr[i][j]+1)==arr[i][j+1]){
+             w= dp[i][j]=1+longestPath(i,j+1,arr,dp);
+          }
+         
+         return dp[i][j] = Math.max(x, Math.max(y, Math.max(z, Math.max(w, 1))));    
+	}
+}

@@ -1,0 +1,59 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class GFG {
+	public static void main (String[] args) throws IOException {
+		//code
+		BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+		int t=Integer.parseInt(br.readLine());
+		while(t-->0){
+		    String values[] = br.readLine().split(" ");
+		    int n=Integer.parseInt(values[0]);
+		    int k=Integer.parseInt(values[1]);
+		    String input[] = br.readLine().split(" ");
+		    int arr[]=new int[n];
+		    for(int i=0;i<n;i++){
+		        arr[i]=Integer.parseInt(input[i]);
+		    }
+		    Arrays.sort(arr);
+		    int noRemoval=coinPiles(arr,0,n,k);
+		    int min=noRemoval;
+		    int removedPiles=0;
+		    for(int i=0;i<n-1;i++){
+		        removedPiles+=arr[i];
+		        min=Math.min(min,removedPiles+coinPiles(arr,i+1,n,k));
+		    }
+		   System.out.println(min);
+		}
+	}
+	
+	public static int coinPiles(int[] brr,int s,int n,int k){
+	    int arr[]=new int[n];
+	     for(int i=0;i<n;i++)
+	       arr[i]=brr[i];
+	    int count=0;
+	    
+	    
+	    for(int i=s;i<n;i++){
+	        for(int j=i+1;j<n;j++){
+	        int diff=Math.abs(arr[i]-arr[j]);
+	        if(diff>k){
+	            count+=diff-k;
+	        }
+	        
+	        if(arr[i]>arr[j])
+                          {
+                              arr[i]=arr[i]-(diff-k);
+                              
+                          }
+                          else
+                          arr[j]=arr[j]-(diff-k);
+	            
+	            }
+	    }
+	          
+	    
+	    return count;
+	}
+}

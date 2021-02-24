@@ -1,0 +1,142 @@
+Recursion:
+
+class Knapsack 
+{ 
+    // Returns the maximum value that can be put in a knapsack of capacity W 
+    // static class node{
+    //     int value;
+    //     int weight;
+    //     node(int w,int v){
+            
+    //         weight=w;
+    //         value=v;
+    //     }
+    // }
+    
+    
+    static int knapSack(int W, int wt[], int val[], int N) 
+    { 
+         // your code here 
+         
+         if(W==0 || N==0){
+             return 0;
+         }
+         if(W<wt[N-1]){
+             return knapSack(W,wt,val,N-1);
+         }
+         
+         return Math.max(knapSack(W,wt,val,N-1),val[N-1]+knapSack(W-wt[N-1],wt,val,N-1));
+         
+             
+         
+      
+    }
+    
+}
+
+
+
+Recursion+Memoization:
+
+
+class Knapsack 
+{ 
+    // Returns the maximum value that can be put in a knapsack of capacity W 
+    // static class node{
+    //     int value;
+    //     int weight;
+    //     node(int w,int v){
+            
+    //         weight=w;
+    //         value=v;
+    //     }
+    // }
+    
+    
+    static int knapSack(int W, int wt[], int val[], int N) 
+    { 
+         // your code here 
+         int dp[][]=new int[W][N];
+         for(int i=0;i<W;i++){
+             for(int j=0;j<N;j++){
+                 dp[i][j]=-1;
+             }
+         }
+         return knapSackHelp(W,wt,val,N,dp);
+        //  if(W==0 || N==0){
+        //      return 0;
+        //  }
+        //  if(W<wt[N-1]){
+        //      return knapSack(W,wt,val,N-1);
+        //  }
+         
+        //  return Math.max(knapSack(W,wt,val,N-1),val[N-1]+knapSack(W-wt[N-1],wt,val,N-1));
+         
+             
+         
+      
+    }
+    
+    static int knapSackHelp(int W, int wt[], int val[], int N,int[][] dp){
+        if(W==0 || N==0){
+            // dp[W-1][N-1]=0;
+             return 0;
+         }
+        if(dp[W-1][N-1]!=-1){
+            
+            return dp[W][N-1];
+        }
+        int result;
+         if(W<wt[N-1]){
+             result=knapSack(W,wt,val,N-1);
+             
+         }else{
+         result=Math.max(knapSack(W,wt,val,N-1),val[N-1]+knapSack(W-wt[N-1],wt,val,N-1));
+         }
+         dp[W-1][N-1]=result;
+         return result;
+         
+    }
+    
+}
+
+
+Tabulation Dynamic Programming:
+
+class Knapsack 
+{ 
+    
+    
+    
+    static int knapSack(int W, int wt[], int val[], int N) 
+    { 
+         // your code here 
+         int dp[][]=new int[N+1][W+1];
+         for(int i=0;i<N+1;i++){
+             for(int j=0;j<W+1;j++){
+                 if(i==0 || j==0){
+                     dp[i][j]=0;
+                 }
+                 else if(wt[i-1]>j){
+                     dp[i][j]=dp[i-1][j];
+                 }
+                 else
+                 {
+                     dp[i][j]=Math.max(dp[i-1][j],val[i-1]+dp[i-1][j-wt[i-1]]);
+                 }
+             }
+         }
+         return dp[N][W];
+        
+             
+         
+      
+    }
+    
+    
+}
+
+
+
+
+

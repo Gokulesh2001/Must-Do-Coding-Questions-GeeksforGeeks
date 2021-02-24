@@ -1,0 +1,19 @@
+class Solution{
+    static int toyCount(int N, int K, int arr[])
+    {
+        // code here
+        int count=0;
+         int sum=0;
+        Arrays.sort(arr);
+        for(int e:arr){
+            sum+=e;
+            if(sum<=K){
+                count+=1;
+            }
+            else{
+                break;
+            }
+        }
+        return count;
+    }
+}

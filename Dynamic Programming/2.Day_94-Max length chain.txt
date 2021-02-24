@@ -1,0 +1,30 @@
+ class SortbyX implements Comparator<Pair> 
+{ 
+    // Used for sorting in ascending order of 
+    // roll number 
+    public int compare(Pair a, Pair b) 
+    { 
+        return a.x - b.x; 
+    } 
+} 
+
+
+class GfG
+{
+    int maxChainLength(Pair p[], int n)
+    {
+       // your code here
+       Arrays.sort(p,new SortbyX());
+    int dp[]=new int[n];
+    Arrays.fill(dp,1);
+
+
+      for(int i=1;i<n;i++)
+        for(int j=0;j<i;j++)
+            if(p[i].x>p[j].y && dp[i]<=dp[j])
+                dp[i]=dp[j]+1;
+                
+       return dp[n-1];
+    }
+    
+}
