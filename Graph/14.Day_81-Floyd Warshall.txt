@@ -1,0 +1,79 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class GFG {
+	public static void main (String[] abc) throws IOException {
+		//code
+		BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+		int t=Integer.parseInt(br.readLine());
+		while(t-->0){
+		    
+		    int n=Integer.parseInt(br.readLine());
+		   
+		    
+		    
+		    int[][] arr=new int[n][n];
+		    for(int i=0;i<n;i++){
+		        String[] values=br.readLine().split(" ");
+		        int index=0;
+		        for(int j=0;j<n;j++){
+		            
+		            arr[i][j]=Integer.parseInt(values[index++]);
+		        }
+		    }
+		    
+		  //  System.out.println(shortestPath(arr,x,y));
+		      int ans[][]=floydWarshall(arr);
+		      for(int i=0;i<n;i++){
+		        for(int j=0;j<n-1;j++){
+		           if(ans[i][j]==10000000) {
+		               System.out.print("INF ");
+		           }
+		           else{
+		               System.out.print(ans[i][j]+" ");
+		           }
+		        }   
+		        
+		        if(ans[i][n-1]==10000000) {
+		               System.out.print("INF");
+		           }
+		           else{
+		               System.out.print(ans[i][n-1]);
+		           }
+		           System.out.println();
+		      
+		      
+		}
+		
+	}
+	}
+		public static int[][] floydWarshall(int[][] arr){
+		    int n=arr.length;
+		    int dp[][]=new int[n][n];
+		    
+		    for(int l=0;l<n;l++){
+		        int k=l;
+		        for(int i=0;i<n;i++){
+		        for(int j=0;j<n;j++){
+		            if(i==j || i==k ||j==k){
+		                dp[i][j]=arr[i][j];
+		            }
+		            else{
+		                dp[i][j]=Math.min(arr[i][j],arr[i][k]+arr[k][j]);
+		            }
+		        }
+		        }
+		        for(int s=0;s<n;s++){
+		        for(int d=0;d<n;d++){
+		            arr[s][d]=dp[s][d];
+		        }
+		        }
+		        
+		    }
+		    
+		 return dp;   
+		}
+		
+	
+}
