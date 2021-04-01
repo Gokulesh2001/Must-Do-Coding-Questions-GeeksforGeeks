@@ -1,0 +1,64 @@
+class Solution
+{
+    
+    public String[] wordBoggle(char board[][], String[] dictionary)
+    {
+        // Write your code here
+        ArrayList<String> res=new ArrayList<>();
+        HashSet<String> set=new HashSet<String>();
+        boolean[][] visited=new boolean[board.length][board[0].length];
+        
+        for(int k=0;k<dictionary.length;k++){
+        
+        for(int i=0;i<board.length;i++){
+            
+            for(int j=0;j<board[0].length;j++){
+                
+                backTrack(res,i,j,board,dictionary[k],0,visited,set);
+                if(set.contains(dictionary[k])){
+                    i=board.length;
+                    set.remove(dictionary[k]);
+                }
+        }
+        
+        }
+        }
+        
+        String[] arr = new String[res.size()]; 
+        arr = res.toArray(arr); 
+      return arr; 
+    }
+    
+    void backTrack(ArrayList<String> res,int bi,int bj,char[][] board,String str,int i,boolean[][] visited,HashSet<String> set){
+        int n=board.length;
+        int m=board[0].length;
+        
+        if( bi>=n || bi<0 || bj>=m || bj<0 || visited[bi][bj]==true || str.length()<=i ||str.charAt(i)!=board[bi][bj]){
+            return;
+        }
+        
+        if(i==str.length()-1){
+            if(set.contains(str)==false){
+            res.add(str);
+            set.add(str);
+            }
+            return;
+        }
+        
+        
+        visited[bi][bj]=true;
+        backTrack(res,bi-1,bj-1,board,str,i+1,visited,set);
+        backTrack(res,bi-1,bj,board,str,i+1,visited,set);
+        backTrack(res,bi-1,bj+1,board,str,i+1,visited,set);
+        backTrack(res,bi,bj-1,board,str,i+1,visited,set);
+        backTrack(res,bi,bj+1,board,str,i+1,visited,set);
+        backTrack(res,bi+1,bj-1,board,str,i+1,visited,set);
+        backTrack(res,bi+1,bj,board,str,i+1,visited,set);
+        backTrack(res,bi+1,bj+1,board,str,i+1,visited,set);
+        visited[bi][bj]=false;
+        
+        return;
+        
+    }
+    
+}

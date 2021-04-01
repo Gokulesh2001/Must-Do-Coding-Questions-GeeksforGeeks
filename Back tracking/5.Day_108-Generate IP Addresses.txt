@@ -1,0 +1,27 @@
+class Solution {
+    public ArrayList<String> genIp(String s) {
+        ArrayList<String> res=new ArrayList<>();
+        backtrack(res,s,"",0,0);
+        return res;
+    }
+    public static void backtrack(ArrayList<String> res,String s,String temp,int start,int seg){
+        if(seg==4 && start==s.length()){
+            res.add(temp.substring(0,temp.length()-1)); // to omit the last "."
+            return;
+        }
+        // if(seg==4 || start==s.length())return;
+        for(int len=1;len<=3;len++){
+            if(start+len<=s.length()){
+                String part=s.substring(start,start+len);
+                if(isValid(part)){
+                    backtrack(res,s,temp+part+".",start+len,seg+1);
+                }
+            }
+        }
+    }
+    public static boolean isValid(String s){
+        if( (s.length()>1 && s.charAt(0)=='0' )|| Integer.parseInt(s)>255)
+        return false;
+        return true;
+    }
+}

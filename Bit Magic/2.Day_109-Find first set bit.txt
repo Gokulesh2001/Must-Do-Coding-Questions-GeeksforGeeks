@@ -1,0 +1,32 @@
+public static int getFirstSetBit(int n){
+        
+    // Your code here
+    if(n==0){
+        return 0;
+    }
+    String str=Integer.toBinaryString(n);
+    int ans=0;
+    for(int i=str.length()-1;i>=0;i--,ans++){
+        if(str.charAt(i)=='1'){
+            break;
+        }
+        
+    }
+    return ans+1;
+        
+}
+
+
+
+==========================================================================================================================
+class Solution{
+    
+    public static int getFirstSetBit(int n){
+            if(n==0) return 0;
+            return (int)(Math.log(n&-n)/Math.log(2.0)) + 1; 
+        //Doing AND operation of n and -n. n and -n will have similar bits only till the 
+        //first set bit starting from the right and differnt bits after the first set bit.
+        //Then we take log2 of the result to find the position.
+        //We add 1 to the obtained value so that the count starts from 1 instead of zero.
+    }
+}
